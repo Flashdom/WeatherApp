@@ -3,6 +3,7 @@ package com.example.weatherapp.weatherapp;
 import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
+import android.support.annotation.NonNull;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
 import android.support.v4.app.Fragment;
@@ -33,13 +34,39 @@ public class Navigation_drawer_activity extends AppCompatActivity
         myAnotherFragment= new myAnother_fragment();
         fragmentManager=getSupportFragmentManager();
         fragmentTransaction=fragmentManager.beginTransaction();
-        fragmentTransaction.add(R.id.fragmentlayout, myFragment);
+        fragmentTransaction.add(R.id.fragmentContainer, myFragment);
         fragmentTransaction.commit();
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
-        DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
+        final DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
         ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(this, drawer, toolbar, R.string.navigation_drawer_open, R.string.navigation_drawer_close);
         drawer.addDrawerListener(toggle);
         toggle.syncState();
+
+        final NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
+        navigationView.setNavigationItemSelectedListener(new NavigationView.OnNavigationItemSelectedListener() {
+            @Override
+            public boolean onNavigationItemSelected(@NonNull MenuItem menuItem) {
+                FragmentTransaction ft = null;
+                switch (menuItem.getItemId()){
+                    case R.id.Callback:
+                        ft = getSupportFragmentManager().beginTransaction();
+                        ft.replace(R.id.fragmentContainer, myFragment);
+                        ft.commit();
+                        drawer.closeDrawers();
+
+                        break;
+                    case R.id.about:
+                        ft = getSupportFragmentManager().beginTransaction();
+                        ft.replace(R.id.fragmentContainer, myAnotherFragment);
+                        ft.commit();
+                        drawer.closeDrawers();
+                        break;
+                    default:
+                        break;
+                }
+                return false;
+            }
+        });
     }
 
     @Override

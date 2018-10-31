@@ -92,13 +92,7 @@ public class MyFragment extends Fragment {
 
 
 
-        NavigationView navigationView = (NavigationView) root.findViewById(R.id.nav_view);
-        navigationView.setNavigationItemSelectedListener(new NavigationView.OnNavigationItemSelectedListener() {
-            @Override
-            public boolean onNavigationItemSelected(@NonNull MenuItem menuItem) {
-                return false;
-            }
-        });
+
         return root;
     }
 

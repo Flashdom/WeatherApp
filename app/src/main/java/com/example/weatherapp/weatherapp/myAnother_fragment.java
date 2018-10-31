@@ -66,7 +66,7 @@ public class myAnother_fragment extends Fragment {
                              Bundle savedInstanceState) {
         View root=inflater.inflate(R.layout.fragment_my_another_fragment, container, false);
         TextView textView;
-        textView=root.findViewById(R.id.fragmenttext);
+        textView=root.findViewById(R.id.my_another_fragment_text);
         textView.setText("Some another text");
         return root;
     }
@@ -84,8 +84,7 @@ public class myAnother_fragment extends Fragment {
         if (context instanceof OnFragmentInteractionListener) {
             mListener = (OnFragmentInteractionListener) context;
         } else {
-            throw new RuntimeException(context.toString()
-                    + " must implement OnFragmentInteractionListener");
+
         }
     }
 
