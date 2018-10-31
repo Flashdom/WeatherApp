@@ -15,7 +15,7 @@ import android.widget.TextView;
 
 import java.util.List;
 
-public class Adapter extends RecyclerView.Adapter<Adapter.CustomViewHolder> implements onAdapterClick{
+public class Adapter extends RecyclerView.Adapter<Adapter.CustomViewHolder> implements OnAdapterClick{
 
     private List<String> myList;
     private Context mContext;
@@ -57,7 +57,7 @@ public class Adapter extends RecyclerView.Adapter<Adapter.CustomViewHolder> impl
     @Override
     public void removeView(int position) {
         myList.remove(position);
-        notifyDataSetChanged();
+        notifyItemRemoved(position);
     }
 
     public void setAll(List<String> list) {
@@ -79,9 +79,9 @@ public class Adapter extends RecyclerView.Adapter<Adapter.CustomViewHolder> impl
 
     class CustomViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener, PopupMenu.OnMenuItemClickListener, View.OnCreateContextMenuListener {
 
-        private onAdapterClick callback;
+        private OnAdapterClick callback;
 
-        void attachCallback(onAdapterClick callback){
+        void attachCallback(OnAdapterClick callback){
             this.callback = callback;
         }
 
@@ -142,7 +142,7 @@ public class Adapter extends RecyclerView.Adapter<Adapter.CustomViewHolder> impl
 
     
     }
-interface onAdapterClick{
+interface OnAdapterClick{
     void removeView(int pos);
     void editView(int pos);
 }
