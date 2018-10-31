@@ -13,12 +13,12 @@ import android.widget.TextView;
 /**
  * A simple {@link Fragment} subclass.
  * Activities that contain this fragment must implement the
- * {@link myAnother_fragment.OnFragmentInteractionListener} interface
+ * {@link MyAnotherFragment.OnFragmentInteractionListener} interface
  * to handle interaction events.
- * Use the {@link myAnother_fragment#newInstance} factory method to
+ * Use the {@link MyAnotherFragment#newInstance} factory method to
  * create an instance of this fragment.
  */
-public class myAnother_fragment extends Fragment {
+public class MyAnotherFragment extends Fragment {
     // TODO: Rename parameter arguments, choose names that match
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
     private static final String ARG_PARAM1 = "param1";
@@ -30,7 +30,7 @@ public class myAnother_fragment extends Fragment {
 
     private OnFragmentInteractionListener mListener;
 
-    public myAnother_fragment() {
+    public MyAnotherFragment() {
         // Required empty public constructor
     }
 
@@ -40,11 +40,11 @@ public class myAnother_fragment extends Fragment {
      *
      * @param param1 Parameter 1.
      * @param param2 Parameter 2.
-     * @return A new instance of fragment myAnother_fragment.
+     * @return A new instance of fragment MyAnotherFragment.
      */
     // TODO: Rename and change types and number of parameters
-    public static myAnother_fragment newInstance(String param1, String param2) {
-        myAnother_fragment fragment = new myAnother_fragment();
+    public static MyAnotherFragment newInstance(String param1, String param2) {
+        MyAnotherFragment fragment = new MyAnotherFragment();
         Bundle args = new Bundle();
         args.putString(ARG_PARAM1, param1);
         args.putString(ARG_PARAM2, param2);

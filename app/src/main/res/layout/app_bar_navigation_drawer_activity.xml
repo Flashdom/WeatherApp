@@ -26,14 +26,14 @@
         android:id="@+id/include"
         layout="@layout/content_navigation_drawer_activity" />
 
-    <LinearLayout
+    <FrameLayout
         android:id="@+id/fragmentContainer"
-        android:layout_width="129dp"
-        android:layout_height="66dp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
         android:orientation="vertical"
         android:layout_marginTop="56dp"
         app:layout_anchor="@+id/include"
-        app:layout_anchorGravity="top|center"></LinearLayout>
+        app:layout_anchorGravity="top|center"></FrameLayout>
 
     <android.support.design.widget.FloatingActionButton
         android:id="@+id/fab"

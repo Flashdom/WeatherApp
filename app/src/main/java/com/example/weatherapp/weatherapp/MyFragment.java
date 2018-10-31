@@ -18,14 +18,6 @@ import android.view.ViewGroup;
 import android.widget.TextView;
 
 
-/**
- * A simple {@link Fragment} subclass.
- * Activities that contain this fragment must implement the
- * {@link MyFragment.OnFragmentInteractionListener} interface
- * to handle interaction events.
- * Use the {@link MyFragment#newInstance} factory method to
- * create an instance of this fragment.
- */
 public class MyFragment extends Fragment {
     // TODO: Rename parameter arguments, choose names that match
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
@@ -38,27 +30,9 @@ public class MyFragment extends Fragment {
 
     private OnFragmentInteractionListener mListener;
 
-    public MyFragment() {
-        // Required empty public constructor
-    }
 
-    /**
-     * Use this factory method to create a new instance of
-     * this fragment using the provided parameters.
-     *
-     * @param param1 Parameter 1.
-     * @param param2 Parameter 2.
-     * @return A new instance of fragment MyFragment.
-     */
-    // TODO: Rename and change types and number of parameters
-    public static MyFragment newInstance(String param1, String param2) {
-        MyFragment fragment = new MyFragment();
-        Bundle args = new Bundle();
-        args.putString(ARG_PARAM1, param1);
-        args.putString(ARG_PARAM2, param2);
-        fragment.setArguments(args);
-        return fragment;
-    }
+
+
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -76,22 +50,6 @@ public class MyFragment extends Fragment {
         TextView textView;
         textView=root.findViewById(R.id.fragmenttext);
         textView.setText("Some text");
-
-        //setSupportActionBar(toolbar);
-      /*  FloatingActionButton fab = (FloatingActionButton) root.findViewById(R.id.fab);
-        fab.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
-                        .setAction("Action", null).show();
-            }
-
-
-
-        });*/
-
-
-
 
         return root;
     }

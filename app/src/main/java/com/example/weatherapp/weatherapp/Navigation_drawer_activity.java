@@ -1,16 +1,10 @@
 package com.example.weatherapp.weatherapp;
 
-import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
-import android.support.design.widget.FloatingActionButton;
-import android.support.design.widget.Snackbar;
-import android.support.v4.app.Fragment;
-import android.support.v4.app.FragmentActivity;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
-import android.view.View;
 import android.support.design.widget.NavigationView;
 import android.support.v4.view.GravityCompat;
 import android.support.v4.widget.DrawerLayout;
@@ -24,24 +18,25 @@ public class Navigation_drawer_activity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener, MyFragment.OnFragmentInteractionListener {
     FragmentManager fragmentManager;
     FragmentTransaction fragmentTransaction;
-    myAnother_fragment myAnotherFragment;
+    MyAnotherFragment myAnotherFragment;
     MyFragment myFragment;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_navigation_drawer_activity);
-        myFragment=new MyFragment();
-        myAnotherFragment= new myAnother_fragment();
-        fragmentManager=getSupportFragmentManager();
-        fragmentTransaction=fragmentManager.beginTransaction();
-        fragmentTransaction.add(R.id.fragmentContainer, myFragment);
-        fragmentTransaction.commit();
+        initFragments();
+        initNavigationDrawer();
+
+    }
+
+
+    public void initNavigationDrawer()
+    {
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         final DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
         ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(this, drawer, toolbar, R.string.navigation_drawer_open, R.string.navigation_drawer_close);
         drawer.addDrawerListener(toggle);
         toggle.syncState();
-
         final NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
         navigationView.setNavigationItemSelectedListener(new NavigationView.OnNavigationItemSelectedListener() {
             @Override
@@ -67,8 +62,21 @@ public class Navigation_drawer_activity extends AppCompatActivity
                 return false;
             }
         });
+
+
+
     }
 
+        public void initFragments()
+        {
+            myFragment=new MyFragment();
+            myAnotherFragment= new MyAnotherFragment();
+            fragmentManager=getSupportFragmentManager();
+            fragmentTransaction=fragmentManager.beginTransaction();
+            fragmentTransaction.add(R.id.fragmentContainer, myFragment);
+            fragmentTransaction.commit();
+
+        }
     @Override
     public void onBackPressed() {
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
