@@ -1,0 +1,7 @@
+<resources>
+    <string name="app_name">WeatherApp</string>
+    <string name ="item1">Add</string>
+    <string name="item2">Do nothing</string>
+    <string name="Item3">Clear</string>
+    <string name="button">Pop-up menu</string>
+</resources>
