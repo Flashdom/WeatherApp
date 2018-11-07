@@ -1,5 +1,7 @@
 package com.example.weatherapp.weatherapp;
 
+import android.support.design.widget.NavigationView;
+import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
@@ -11,12 +13,14 @@ import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.AdapterView;
+import android.widget.ImageView;
+import android.widget.TextView;
 
 import java.util.ArrayList;
 import java.util.List;
 
 public class MainActivity extends AppCompatActivity {
-
+    NavigationView navigationView;
     RecyclerView recyclerView;
     Adapter adapter;
     @Override
@@ -39,11 +43,12 @@ public class MainActivity extends AppCompatActivity {
     public boolean onOptionsItemSelected(MenuItem item) {
         // обработка нажатий
         switch (item.getItemId()) {
-            case R.id.item1: {
+            case R.id.menu_button_add:
+            {
                 adapter.addView("New");
                 break;
             }
-            case R.id.item3:
+            case R.id.menu_button_clear:
                 adapter.clear();
                 return true;
             default:
@@ -74,18 +79,26 @@ public class MainActivity extends AppCompatActivity {
         recyclerView.setAdapter(adapter);
 
         registerForContextMenu(recyclerView);
+        navigationView=findViewById(R.id.nav_view);
+        DrawerLayout drawerLayout =findViewById(R.id.drawer_layout);
+        initHeader();
     }
-
+    private void initHeader(){
+        ImageView imageView = (ImageView) navigationView.getHeaderView(0).findViewById(R.id.imageView);
+        TextView nameView = (TextView) navigationView.getHeaderView(0).findViewById(R.id.textView);
+        imageView.setImageResource(R.drawable.ic_menu_gallery);
+        nameView.setText("text");
+    }
     public void showPopup(View v) {
         PopupMenu popup = new PopupMenu(this, v);
         popup.setOnMenuItemClickListener(new PopupMenu.OnMenuItemClickListener() {
             @Override
             public boolean onMenuItemClick(MenuItem item) {
                 switch (item.getItemId()) {
-                    case R.id.item1:
+                    case R.id.menu_button_add:
                        adapter.addView("NewOne");
                         return true;
-                    case R.id.item3:
+                    case R.id.menu_button_clear:
                         adapter.clear();
                         return true;
                     default:

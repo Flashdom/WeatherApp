@@ -1,7 +1,20 @@
 <resources>
     <string name="app_name">WeatherApp</string>
-    <string name ="item1">Add</string>
-    <string name="item2">Do nothing</string>
-    <string name="Item3">Clear</string>
+    <string name="item_add">Add</string>
+    <string name="item_dn">Do nothing</string>
+    <string name="item_clear">Clear</string>
     <string name="button">Pop-up menu</string>
+    <string name="title_activity_navigation_drawer_activity">Navigation_drawer_activity</string>
+    <string name="navigation_drawer_open">Open navigation drawer</string>
+    <string name="navigation_drawer_close">Close navigation drawer</string>
+    <string name="nav_header_title">Android Studio</string>
+    <string name="nav_header_subtitle">android.studio@android.com</string>
+    <string name="nav_header_desc">Navigation header</string>
+    <string name="action_settings">Settings</string>
+    <string name="about">О разработчике</string>
+    <string name="Webform">Откликнуться</string>
+
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+
 </resources>

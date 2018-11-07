@@ -4,19 +4,19 @@
 
 
     <item
-        android:id="@+id/item1"
-        android:title="@string/item1"
-        android:text="@string/item1"
+        android:id="@+id/menu_button_add"
+        android:title="@string/item_add"
+        android:text="@string/item_add"
         app:showAsAction="always"/>
     <item
-        android:title="@string/item2"
-        android:id="@+id/item2"
-        android:text="@string/item2"
+        android:title="@string/item_dn"
+        android:id="@+id/menu_button_do_nothing"
+        android:text="@string/item_dn"
         app:showAsAction="never"/>
     <item
-        android:id="@+id/item3"
-        android:title="@string/Item3"
-        android:text="@string/Item3"
+        android:id="@+id/menu_button_clear"
+        android:title="@string/item_clear"
+        android:text="@string/item_clear"
         app:showAsAction="never"/>
 
 </menu>
