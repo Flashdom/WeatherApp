@@ -13,7 +13,6 @@ import android.os.Process;
 
 public class MyService extends Service {
 
-
     private Looper mServiceLooper;
     private ServiceHandler mServiceHandler;
 

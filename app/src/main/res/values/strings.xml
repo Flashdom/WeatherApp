@@ -13,7 +13,8 @@
     <string name="action_settings">Settings</string>
     <string name="about">О разработчике</string>
     <string name="Webform">Откликнуться</string>
-
+    <string name="api">2e9a8a055551d7bbc104c9ad6dfc7c1e</string>
+    <string name="notfound">Нет нужного места </string>
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
 

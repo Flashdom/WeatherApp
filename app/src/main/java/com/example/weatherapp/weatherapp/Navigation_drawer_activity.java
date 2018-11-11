@@ -12,16 +12,28 @@ import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.Toast;
+
+import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.Task;
+import com.google.firebase.auth.AuthResult;
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
 
 public class Navigation_drawer_activity extends AppCompatActivity
-        implements NavigationView.OnNavigationItemSelectedListener, MyFragment.OnFragmentInteractionListener {
+        implements NavigationView.OnNavigationItemSelectedListener, MyFragment.OnFragmentInteractionListener, RequestFragment.OnFragmentInteractionListener {
     FragmentManager fragmentManager;
     FragmentTransaction fragmentTransaction;
     MyAnotherFragment myAnotherFragment;
+    RequestFragment requestFragment;
     MyFragment myFragment;
+    private FirebaseAuth mAuth;
+    private int users;
+    private String TAG="ABC";
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -29,7 +41,21 @@ public class Navigation_drawer_activity extends AppCompatActivity
         initFragments();
         initNavigationDrawer();
         onStartService();
+        initFireBase();
+    }
+    public void updateUI(FirebaseUser user)
+    {
+        if (user!=null)
+        users++;
 
+    }
+
+    @Override
+    public void onStart() {
+        super.onStart();
+        // Check if user is signed in (non-null) and update UI accordingly.
+        FirebaseUser currentUser = mAuth.getCurrentUser();
+        updateUI(currentUser);
     }
     public void onStartService()
     {
@@ -37,11 +63,47 @@ public class Navigation_drawer_activity extends AppCompatActivity
         startService(intent);
 
     }
-    public void onStopService(View view) {
+    public void onStopService() {
         Intent intent = new Intent(this, MyService.class);
         stopService(intent);
     }
+    public void createAccount(String email, String password)
+    {
+        mAuth.createUserWithEmailAndPassword(email, password)
+                .addOnCompleteListener(this, new OnCompleteListener<AuthResult>() {
+                    @Override
+                    public void onComplete(@NonNull Task<AuthResult> task) {
+                        if (task.isSuccessful()) {
+                            // Sign in success, update UI with the signed-in user's information
+                            Log.d(TAG, "createUserWithEmail:success");
+                            FirebaseUser user = mAuth.getCurrentUser();
+                            updateUI(user);
+                        } else {
+                            // If sign in fails, display a message to the user.
+                            Log.w(TAG, "createUserWithEmail:failure", task.getException());
+                            //Toast.makeText(.this, "Authentication failed.",
+                             //       Toast.LENGTH_SHORT).show();
+                            updateUI(null);
+                        }
 
+                        // ...
+                    }
+                });
+
+    }
+    public void initFireBase()
+    {
+        users=0;
+        mAuth=FirebaseAuth.getInstance();
+
+    }
+        @Override
+        protected void onDestroy()
+        {
+         super.onDestroy();
+            onStopService();
+
+        }
     public void initNavigationDrawer()
     {
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
@@ -68,6 +130,14 @@ public class Navigation_drawer_activity extends AppCompatActivity
                         ft.commit();
                         drawer.closeDrawers();
                         break;
+                    case R.id.nav_slideshow:
+                        createAccount("arr98@mail.ru", "MyPassword");
+                        drawer.closeDrawers();
+                    case R.id.nav_manage:
+                        ft = getSupportFragmentManager().beginTransaction();
+                        ft.replace(R.id.fragmentContainer, requestFragment);
+                        ft.commit();
+                        drawer.closeDrawers();
                     default:
                         break;
                 }
@@ -83,6 +153,7 @@ public class Navigation_drawer_activity extends AppCompatActivity
         {
             myFragment=new MyFragment();
             myAnotherFragment= new MyAnotherFragment();
+            requestFragment=new RequestFragment();
             fragmentManager=getSupportFragmentManager();
             fragmentTransaction=fragmentManager.beginTransaction();
             fragmentTransaction.add(R.id.fragmentContainer, myFragment);
@@ -134,8 +205,12 @@ public class Navigation_drawer_activity extends AppCompatActivity
             fragmentManager.beginTransaction().replace(R.id.fragmentlayout, myAnotherFragment).commit() ;
 
         } else if (id == R.id.nav_slideshow) {
+            //fragmentManager.beginTransaction().replace(R.id.fragmentlayout, myFragment).commit() ;
+
 
         } else if (id == R.id.nav_manage) {
+            fragmentManager.beginTransaction().replace(R.id.fragmentlayout, requestFragment).commit() ;
+
 
         }
 
