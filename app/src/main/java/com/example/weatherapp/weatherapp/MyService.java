@@ -2,6 +2,7 @@ package com.example.weatherapp.weatherapp;
 
 import android.app.Service;
 import android.content.Intent;
+import android.os.Bundle;
 import android.os.Handler;
 import android.os.HandlerThread;
 import android.os.IBinder;
@@ -11,10 +12,16 @@ import android.util.Log;
 import android.widget.Toast;
 import android.os.Process;
 
-public class MyService extends Service {
+import com.example.weatherapp.weatherapp.Fragments.RequestFragment;
+import com.example.weatherapp.weatherapp.CityData.City;
+import com.example.weatherapp.weatherapp.NetworkRequesters.Network_constants;
+import com.example.weatherapp.weatherapp.NetworkRequesters.OkHttpRequester;
+
+public class MyService extends Service implements Network_constants {
 
     private Looper mServiceLooper;
     private ServiceHandler mServiceHandler;
+    private  String city;
 
     // Handler that receives messages from the thread
     private final class ServiceHandler extends Handler {
@@ -25,23 +32,36 @@ public class MyService extends Service {
 
         @Override
         public void handleMessage(Message msg) {
-            // Normally we would do some work here, like download a file.
-            // For our sample, we just sleep for 5 seconds.
-            long endTime = System.currentTimeMillis() + 5 * 1000;
-            while (System.currentTimeMillis() < endTime) {
-                synchronized (this) {
-                    try {
-                        wait(endTime - System.currentTimeMillis());
-                    }
-                    catch (Exception e) {
-                    }
-                }
-            }
-            // Stop the service using the startId, so that we don't stop
-            // the service in the middle of handling another job
+           // getWeatherData();
             stopSelf(msg.arg1);
         }
     }
+
+
+    public void getWeatherData()
+    {
+       City myCity = OkHttpRequester.getWeatherByCityOkHttp(getApplicationContext(), city);
+           sendDataToUI(myCity);
+
+    }
+
+
+    public void sendDataToUI(City mycity)
+    {
+
+        Intent mIntent = new Intent(this,RequestFragment.class);
+        Bundle mBundle = new Bundle();
+        mBundle.putSerializable(SER_KEY,mycity);
+
+        mIntent.putExtras(mBundle);
+
+        startActivity(mIntent);
+
+    }
+
+
+
+
 
     @Override
     public void onCreate() {
@@ -68,7 +88,7 @@ public class MyService extends Service {
         Message msg = mServiceHandler.obtainMessage();
         msg.arg1 = startId;
         mServiceHandler.sendMessage(msg);
-
+        city=intent.getStringExtra("ChosenCity");
         // If we get killed, after returning from here, restart
         return START_STICKY;
     }

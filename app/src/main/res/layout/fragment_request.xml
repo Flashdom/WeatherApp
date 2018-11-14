@@ -3,24 +3,40 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".RequestFragment"
+    tools:context=".Fragments.RequestFragment"
     android:layout_gravity="center">
 
     <!-- TODO: Update blank fragment layout -->
 
 
     <TextView
-        android:id="@+id/tv_temperature"
+        android:id="@+id/temperature"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="TextView" />
-
+        android:layout_marginTop="124dp"
+        android:layout_marginLeft="180dp"
+        android:text="xC" />
 
     <Button
-        android:id="@+id/button_city"
+        android:layout_width="wrap_content"
+        android:id="@+id/button_send"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="132dp"
+        android:layout_marginTop="154dp"
+        android:text="@string/getweather" />
+
+    <EditText
+        android:id="@+id/city_name"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Button" />
-
-
+        android:layout_marginLeft="144dp"
+        android:layout_marginTop="60dp"
+        android:text="London" />
+    <ImageView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/weather_pic"
+        android:layout_marginLeft="144dp"
+        android:layout_marginBottom="60dp"
+        />
 </FrameLayout>

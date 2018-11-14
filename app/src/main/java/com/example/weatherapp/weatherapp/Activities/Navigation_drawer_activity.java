@@ -1,4 +1,4 @@
-package com.example.weatherapp.weatherapp;
+package com.example.weatherapp.weatherapp.Activities;
 
 import android.content.Intent;
 import android.net.Uri;
@@ -15,9 +15,10 @@ import android.support.v7.widget.Toolbar;
 import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
-import android.view.View;
-import android.widget.Toast;
 
+import com.example.weatherapp.weatherapp.Fragments.RequestFragment;
+import com.example.weatherapp.weatherapp.MyService;
+import com.example.weatherapp.weatherapp.R;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthResult;
@@ -25,12 +26,12 @@ import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 
 public class Navigation_drawer_activity extends AppCompatActivity
-        implements NavigationView.OnNavigationItemSelectedListener, MyFragment.OnFragmentInteractionListener, RequestFragment.OnFragmentInteractionListener {
+        implements NavigationView.OnNavigationItemSelectedListener, RequestFragment.MyFragment.OnFragmentInteractionListener, RequestFragment.OnFragmentInteractionListener {
     FragmentManager fragmentManager;
     FragmentTransaction fragmentTransaction;
-    MyAnotherFragment myAnotherFragment;
+    RequestFragment.MyAnotherFragment myAnotherFragment;
     RequestFragment requestFragment;
-    MyFragment myFragment;
+    RequestFragment.MyFragment myFragment;
     private FirebaseAuth mAuth;
     private int users;
     private String TAG="ABC";
@@ -40,7 +41,7 @@ public class Navigation_drawer_activity extends AppCompatActivity
         setContentView(R.layout.activity_navigation_drawer_activity);
         initFragments();
         initNavigationDrawer();
-        onStartService();
+       // onStartService();
         initFireBase();
     }
     public void updateUI(FirebaseUser user)
@@ -151,8 +152,8 @@ public class Navigation_drawer_activity extends AppCompatActivity
 
         public void initFragments()
         {
-            myFragment=new MyFragment();
-            myAnotherFragment= new MyAnotherFragment();
+            myFragment=new RequestFragment.MyFragment();
+            myAnotherFragment= new RequestFragment.MyAnotherFragment();
             requestFragment=new RequestFragment();
             fragmentManager=getSupportFragmentManager();
             fragmentTransaction=fragmentManager.beginTransaction();

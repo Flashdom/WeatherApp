@@ -17,5 +17,8 @@
     <string name="notfound">Нет нужного места </string>
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="getweather">Show weather</string>
+    <string name="request_token">2145552e4627830af8131f3cb3325bc5</string>
+    <string name="place_not_found">Sorry, we "can't"  find your city</string>
 
 </resources>
