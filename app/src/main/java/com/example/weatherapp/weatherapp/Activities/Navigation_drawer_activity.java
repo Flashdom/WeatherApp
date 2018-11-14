@@ -16,7 +16,10 @@ import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 
+import com.example.weatherapp.weatherapp.Fragments.MyAnotherFragment;
+import com.example.weatherapp.weatherapp.Fragments.MyFragment;
 import com.example.weatherapp.weatherapp.Fragments.RequestFragment;
+import com.example.weatherapp.weatherapp.Fragments.RequestFragmentviaRetrofit;
 import com.example.weatherapp.weatherapp.MyService;
 import com.example.weatherapp.weatherapp.R;
 import com.google.android.gms.tasks.OnCompleteListener;
@@ -26,12 +29,13 @@ import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 
 public class Navigation_drawer_activity extends AppCompatActivity
-        implements NavigationView.OnNavigationItemSelectedListener, RequestFragment.MyFragment.OnFragmentInteractionListener, RequestFragment.OnFragmentInteractionListener {
+        implements NavigationView.OnNavigationItemSelectedListener, MyFragment.OnFragmentInteractionListener, RequestFragment.OnFragmentInteractionListener, RequestFragmentviaRetrofit.OnFragmentInteractionListener {
     FragmentManager fragmentManager;
     FragmentTransaction fragmentTransaction;
-    RequestFragment.MyAnotherFragment myAnotherFragment;
+    MyAnotherFragment myAnotherFragment;
     RequestFragment requestFragment;
-    RequestFragment.MyFragment myFragment;
+    MyFragment myFragment;
+    RequestFragmentviaRetrofit requestFragmentviaRetrofit;
     private FirebaseAuth mAuth;
     private int users;
     private String TAG="ABC";
@@ -132,8 +136,12 @@ public class Navigation_drawer_activity extends AppCompatActivity
                         drawer.closeDrawers();
                         break;
                     case R.id.nav_slideshow:
-                        createAccount("arr98@mail.ru", "MyPassword");
+                        //createAccount("arr98@mail.ru", "MyPassword");
+                         ft = getSupportFragmentManager().beginTransaction();
+                         ft.replace(R.id.fragmentContainer, requestFragmentviaRetrofit);
+                         ft.commit();
                         drawer.closeDrawers();
+                        break;
                     case R.id.nav_manage:
                         ft = getSupportFragmentManager().beginTransaction();
                         ft.replace(R.id.fragmentContainer, requestFragment);
@@ -152,9 +160,10 @@ public class Navigation_drawer_activity extends AppCompatActivity
 
         public void initFragments()
         {
-            myFragment=new RequestFragment.MyFragment();
-            myAnotherFragment= new RequestFragment.MyAnotherFragment();
+            myFragment=new MyFragment();
+            myAnotherFragment= new MyAnotherFragment();
             requestFragment=new RequestFragment();
+            requestFragmentviaRetrofit=new RequestFragmentviaRetrofit();
             fragmentManager=getSupportFragmentManager();
             fragmentTransaction=fragmentManager.beginTransaction();
             fragmentTransaction.add(R.id.fragmentContainer, myFragment);
@@ -206,7 +215,7 @@ public class Navigation_drawer_activity extends AppCompatActivity
             fragmentManager.beginTransaction().replace(R.id.fragmentlayout, myAnotherFragment).commit() ;
 
         } else if (id == R.id.nav_slideshow) {
-            //fragmentManager.beginTransaction().replace(R.id.fragmentlayout, myFragment).commit() ;
+            fragmentManager.beginTransaction().replace(R.id.fragmentlayout, requestFragmentviaRetrofit).commit() ;
 
 
         } else if (id == R.id.nav_manage) {
