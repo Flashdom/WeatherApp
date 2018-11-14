@@ -1,5 +1,6 @@
 package com.example.weatherapp.weatherapp;
 
+import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
@@ -13,6 +14,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.View;
 
 public class Navigation_drawer_activity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener, MyFragment.OnFragmentInteractionListener {
@@ -26,9 +28,19 @@ public class Navigation_drawer_activity extends AppCompatActivity
         setContentView(R.layout.activity_navigation_drawer_activity);
         initFragments();
         initNavigationDrawer();
+        onStartService();
 
     }
+    public void onStartService()
+    {
+        Intent intent = new Intent(this, MyService.class);
+        startService(intent);
 
+    }
+    public void onStopService(View view) {
+        Intent intent = new Intent(this, MyService.class);
+        stopService(intent);
+    }
 
     public void initNavigationDrawer()
     {
