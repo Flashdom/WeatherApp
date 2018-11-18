@@ -72,7 +72,7 @@ public class RequestFragmentviaRetrofit extends Fragment {
         button.setOnClickListener(new View.OnClickListener() {
                                       @Override
                                       public void onClick(View view) {
-                                          requestRetrofit(String.valueOf(editText.getText()), String.valueOf(R.string.request_token));
+                                          requestRetrofit(String.valueOf(editText.getText()), getString(R.string.request_token));
 
                                       }
                                   }

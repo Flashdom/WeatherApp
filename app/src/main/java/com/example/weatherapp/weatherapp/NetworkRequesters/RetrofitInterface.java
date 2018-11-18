@@ -1,7 +1,6 @@
 package com.example.weatherapp.weatherapp.NetworkRequesters;
 
 import com.example.weatherapp.weatherapp.CityData.Weather;
-import com.example.weatherapp.weatherapp.R;
 
 import retrofit2.Call;
 import retrofit2.http.GET;

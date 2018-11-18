@@ -39,7 +39,7 @@ public class OkHttpRequester implements Network_constants
                 Gson gson = builder.create();
                 City myCity = gson.fromJson(answer, City.class);
 
-                if (myCity.cod != SUCCESS) {
+                if (myCity.code != SUCCESS) {
                     return null;
                 }
                 //Log.d("test", myCity.descripti);
