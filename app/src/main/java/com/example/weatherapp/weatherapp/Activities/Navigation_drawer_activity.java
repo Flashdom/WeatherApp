@@ -24,9 +24,7 @@ import com.example.weatherapp.weatherapp.MyService;
 import com.example.weatherapp.weatherapp.R;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
-import com.google.firebase.auth.AuthResult;
-import com.google.firebase.auth.FirebaseAuth;
-import com.google.firebase.auth.FirebaseUser;
+
 
 public class Navigation_drawer_activity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener, MyFragment.OnFragmentInteractionListener, RequestFragment.OnFragmentInteractionListener, RequestFragmentviaRetrofit.OnFragmentInteractionListener {
@@ -36,7 +34,7 @@ public class Navigation_drawer_activity extends AppCompatActivity
     RequestFragment requestFragment;
     MyFragment myFragment;
     RequestFragmentviaRetrofit requestFragmentviaRetrofit;
-    private FirebaseAuth mAuth;
+
     private int users;
     private String TAG="ABC";
     @Override
@@ -46,21 +44,16 @@ public class Navigation_drawer_activity extends AppCompatActivity
         initFragments();
         initNavigationDrawer();
        // onStartService();
-        initFireBase();
+      //  initFireBase();
     }
-    public void updateUI(FirebaseUser user)
-    {
-        if (user!=null)
-        users++;
 
-    }
 
     @Override
     public void onStart() {
         super.onStart();
         // Check if user is signed in (non-null) and update UI accordingly.
-        FirebaseUser currentUser = mAuth.getCurrentUser();
-        updateUI(currentUser);
+        //FirebaseUser currentUser = mAuth.getCurrentUser();
+
     }
     public void onStartService()
     {
@@ -72,7 +65,7 @@ public class Navigation_drawer_activity extends AppCompatActivity
         Intent intent = new Intent(this, MyService.class);
         stopService(intent);
     }
-    public void createAccount(String email, String password)
+  /*  public void createAccount(String email, String password)
     {
         mAuth.createUserWithEmailAndPassword(email, password)
                 .addOnCompleteListener(this, new OnCompleteListener<AuthResult>() {
@@ -102,6 +95,7 @@ public class Navigation_drawer_activity extends AppCompatActivity
         mAuth=FirebaseAuth.getInstance();
 
     }
+    */
         @Override
         protected void onDestroy()
         {

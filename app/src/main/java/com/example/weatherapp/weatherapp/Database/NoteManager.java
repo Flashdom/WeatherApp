@@ -27,7 +27,7 @@ public class NoteManager {
           
         }
 
-        void open() throws SQLException {
+        public void open() throws SQLException {
             database = dbmanager.getWritableDatabase();
         }
 
@@ -103,28 +103,30 @@ public class NoteManager {
 
     public String getNote(String title)
         {
-            boolean flag=false;
-            Note note;
-            Cursor cursor = database.query(DatabaseManager.TABLE_NOTES,
-                    notesAllColumn, null, null, null, null, null);
-            cursor.moveToFirst();
-            while (flag==false)
-            {
-                note=cursorToNote(cursor);
-                if (note.getTitle()==title) {
-                    flag=true;
-                    return note.getNote();
+            try {
+                boolean flag = false;
+                Note note;
+                Cursor cursor = database.query(DatabaseManager.TABLE_NOTES,
+                        notesAllColumn, null, null, null, null, null);
+                cursor.moveToFirst();
+                while (flag == false) {
+                    note = cursorToNote(cursor);
+                    if (note.getTitle() == title) {
+                        flag = true;
+                        return note.getNote();
+
+                    }
+                    cursor.moveToNext();
+                    if (cursor.isAfterLast()) {
+                        break;
+                    }
 
                 }
-                cursor.moveToNext();
-                if (cursor.isAfterLast())
-                {
-                    break;
-                }
-
+            }
+            catch (Exception e) {
+                return null;
             }
             return null;
-
         }
         private Note cursorToNote(Cursor cursor) {
             Note note = new Note();
@@ -151,4 +153,5 @@ public class NoteManager {
         }
 
     }
+
 

@@ -58,6 +58,7 @@ public class RequestFragment extends Fragment implements Network_constants {
         View root=inflater.inflate(R.layout.fragment_request, container, false);
         noteManager= new NoteManager(getActivity().getApplicationContext());
         //elements=noteManager.getAllNotes();
+        noteManager.open();
         temperature=root.findViewById(R.id.temperature);
         myCity=root.findViewById(R.id.city_name);
 
@@ -135,6 +136,8 @@ public class RequestFragment extends Fragment implements Network_constants {
         super.onDetach();
         mListener = null;
     }
+
+
 
     /**
      * This interface must be implemented by activities that contain this
