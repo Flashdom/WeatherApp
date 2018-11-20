@@ -1,13 +1,16 @@
 package com.example.weatherapp.weatherapp.Fragments;
 import android.content.Context;
+import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.TextView;
 
+import com.example.weatherapp.weatherapp.Activities.MyFirebaseInstanceIDService;
 import com.example.weatherapp.weatherapp.R;
 
 public  class MyFragment extends Fragment {
@@ -15,6 +18,7 @@ public  class MyFragment extends Fragment {
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
     private static final String ARG_PARAM1 = "param1";
     private static final String ARG_PARAM2 = "param2";
+    Button button;
 
     // TODO: Rename and change types of parameters
 
@@ -37,6 +41,14 @@ public  class MyFragment extends Fragment {
                              Bundle savedInstanceState) {
         View root=inflater.inflate(R.layout.my_fragment_layout, container, false);
         TextView textView;
+        button=root.findViewById(R.id.sms_button);
+        button.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+               Intent intent = new Intent(getActivity().getApplicationContext(), MyFirebaseInstanceIDService.class);
+                //(intent);
+            }
+        });
         textView=root.findViewById(R.id.fragmenttext);
         textView.setText("Some text");
 
