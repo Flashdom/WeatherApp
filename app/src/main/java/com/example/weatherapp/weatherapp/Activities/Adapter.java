@@ -1,4 +1,4 @@
-package com.example.weatherapp.weatherapp;
+package com.example.weatherapp.weatherapp.Activities;
 
 import android.content.Context;
 import android.support.annotation.NonNull;
@@ -10,8 +10,9 @@ import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.AdapterView;
 import android.widget.TextView;
+
+import com.example.weatherapp.weatherapp.R;
 
 import java.util.List;
 
