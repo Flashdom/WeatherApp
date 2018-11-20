@@ -8,15 +8,20 @@ import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.weatherapp.weatherapp.CityData.City;
+import com.example.weatherapp.weatherapp.Database.Note;
+import com.example.weatherapp.weatherapp.Database.NoteManager;
 import com.example.weatherapp.weatherapp.NetworkRequesters.Network_constants;
 import com.example.weatherapp.weatherapp.NetworkRequesters.OkHttpRequester;
 import com.example.weatherapp.weatherapp.R;
+
+import java.util.List;
 
 
 public class RequestFragment extends Fragment implements Network_constants {
@@ -27,6 +32,9 @@ public class RequestFragment extends Fragment implements Network_constants {
     private TextView temperature;
     private EditText myCity;
     private Button button_getInfo;
+    List<Note> elements;
+    ArrayAdapter<Note> adapter;
+    NoteManager noteManager;
     Handler handler = new Handler();
 
 
@@ -48,8 +56,15 @@ public class RequestFragment extends Fragment implements Network_constants {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         View root=inflater.inflate(R.layout.fragment_request, container, false);
+        noteManager= new NoteManager(getActivity().getApplicationContext());
+        //elements=noteManager.getAllNotes();
         temperature=root.findViewById(R.id.temperature);
         myCity=root.findViewById(R.id.city_name);
+
+        if (noteManager.getNote((getString(R.string.ChosenCity)))!=null)
+            myCity.setText(noteManager.getNote(getString(R.string.ChosenCity)));
+        else
+            myCity.setText(" ");
         button_getInfo=root.findViewById(R.id.button_send);
         button_getInfo.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -59,6 +74,8 @@ public class RequestFragment extends Fragment implements Network_constants {
                     public void run() {
                         if (String.valueOf(myCity.getText())!=null) {
                             final City city;
+                            if (noteManager.getNote((getString(R.string.ChosenCity)))==null)
+                            noteManager.addNote(getString(R.string.ChosenCity), String.valueOf(myCity.getText()));
                             //getActivity().startService(new Intent(getActivity().getApplicationContext(), MyService.class).putExtra("ChosenCity", myCity.getText()));
                            // city = (City) getActivity().getIntent().getSerializableExtra(SER_KEY);
                             city = OkHttpRequester.getWeatherByCityOkHttp(getActivity().getApplicationContext(), String.valueOf(myCity.getText()));
@@ -66,8 +83,7 @@ public class RequestFragment extends Fragment implements Network_constants {
                                 handler.post(new Runnable() {
                                     @Override
                                     public void run() {
-                                        Toast.makeText(getActivity().getApplicationContext(), getString(R.string.place_not_found),
-                                                Toast.LENGTH_LONG).show();
+                                        Toast.makeText(getActivity().getApplicationContext(), getString(R.string.place_not_found), Toast.LENGTH_LONG).show();
                                     }
                                 });
                             }
@@ -75,35 +91,22 @@ public class RequestFragment extends Fragment implements Network_constants {
                                 {
                                     handler.post(new Runnable() {
                                                      @Override
-                                                     public void run() {
-                                                         renderUi(city);
+                                                     public void run() { renderUi(city);
                                                      }
                                                  });
-
-
                                 }
-
-
-
-
                         }
 
                     }
                 }).start();
-
             }
         });
-
-
         return root;
-
     }
 
     public void renderUi(City mycity)
     {
         temperature.setText(String.valueOf(mycity.main.temp));
-
-
     }
 
     // TODO: Rename method, update argument and hook method into UI event

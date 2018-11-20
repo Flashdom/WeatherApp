@@ -1,6 +1,7 @@
 package com.example.weatherapp.weatherapp.CityData;
 
 
+import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
 
 import java.io.Serializable;
@@ -22,7 +23,8 @@ public class City implements Serializable {
     public System system;
     public long id;
     public String name;
-    public int cod;
+    @SerializedName("cod")
+    public int code;
 
 
 }

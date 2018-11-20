@@ -20,5 +20,6 @@
     <string name="getweather">Show weather</string>
     <string name="request_token">2145552e4627830af8131f3cb3325bc5</string>
     <string name="place_not_found">Sorry, we "can't"  find your city</string>
+    <string name="ChosenCity">MyCity</string>
 
 </resources>

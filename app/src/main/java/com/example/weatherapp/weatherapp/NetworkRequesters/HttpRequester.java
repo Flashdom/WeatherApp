@@ -33,7 +33,7 @@ public class HttpRequester implements Network_constants {
             Gson gson = builder.create();
             City myCity = gson.fromJson(rawData.toString(), City.class);
 
-            if (myCity.cod != SUCCESS) {
+            if (myCity.code != SUCCESS) {
                 return null;
             }
             return myCity;
